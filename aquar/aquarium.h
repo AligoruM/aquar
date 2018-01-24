@@ -2,19 +2,24 @@
 #include <vector>
 #include "organism.h"
 #include <memory>
+#include "plankton.h"
+#include <iostream>
+class Organism;
+
+
 class Aquarium
 {
 public:
-	Aquarium();
+	Aquarium(int plankCount_, Parametres* para_);
 	~Aquarium();
 	
 	void tick();
-
-	std::pair<int, int> getSize();
+	void fillAqua(int plankCount);
+	Parametres* getPara();
 	void addOrganism(std::shared_ptr<Organism> org);
 protected:
 	std::vector<std::shared_ptr<Organism>> vect;
-	int heigh;
-	int width;
+	Parametres* para;
+	int plankCount;
 };
 

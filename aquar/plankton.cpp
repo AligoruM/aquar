@@ -2,37 +2,48 @@
 
 
 
+/*Plankton::Plankton()
+{
+	aquarPtr = nullptr;
+	x = 1;
+	y = 1;
+	calories = 10;
+}*/
+
 Plankton::Plankton(std::shared_ptr<Aquarium> pointer)
 {
 	aquarPtr = pointer;
-	std::pair<int, int> size = aquarPtr->getSize();
-	x = std::rand() % size.first;
-	y = std::rand() % size.second;
-	caloriesForBreeding = 200;
+	para = pointer->getPara();
+	x = std::rand() % para->sizeX;
+	y = std::rand() % para->sizeY;
 	calories = 10;
 }
 
 Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
 {
 	aquarPtr = pointer;
+	para = pointer->getPara();
 	x = x_;
 	y = y_;
-	caloriesForBreeding = 30;
 	calories = 10;
 }
 
 
 Plankton::~Plankton()
 {
+
 }
 
 void Plankton::eat()
 {
+	std::cout << "eat" << std::endl;
 	calories += 10;
 }
 
 std::shared_ptr<Organism> Plankton::breeding()
 {
+	std::cout << "breed" << std::endl;
+
 	calories = 20;
 	std::shared_ptr<Organism> obj(new Plankton(x, y - 1, aquarPtr));
 	aquarPtr->addOrganism(obj);
@@ -41,10 +52,11 @@ std::shared_ptr<Organism> Plankton::breeding()
 
 void Plankton::move()
 {
+	std::cout << "move" << std::endl;
 	if (rand() % 2 == 1)//движение по горизонтали
 	{
 		if (rand() % 2 == 1)
-			if (aquarPtr->getSize().first < x + 1)
+			if (aquarPtr->getPara()->sizeX < x + 1)
 				x += 1;
 			else
 			{
@@ -63,7 +75,7 @@ void Plankton::move()
 	if (rand() % 3 == 1)//движение по вертикали
 	{
 		if (rand() % 2 == 1)
-			if (aquarPtr->getSize().second < y + 1)
+			if (aquarPtr->getPara()->sizeY < y + 1)
 				y += 1;
 			else
 			{
@@ -83,11 +95,13 @@ void Plankton::move()
 
 void Plankton::live()
 {
-	if (calories >= caloriesForBreeding)
+	if (calories >= para->calForBreeding)
+	{
 		std::shared_ptr<Organism> trash = breeding();//пока так, может пригодиться
+	}
 	else
 	{
-		eat;
-		move;
+		this->eat();
+		this->move();
 	}
 }

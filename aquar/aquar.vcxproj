@@ -113,6 +113,7 @@
   <ItemGroup>
     <ClCompile Include="aquarium.cpp" />
     <ClCompile Include="Fish.cpp" />
+    <ClCompile Include="organism.cpp" />
     <ClCompile Include="plankton.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -120,6 +121,7 @@
     <ClInclude Include="aquarium.h" />
     <ClInclude Include="Fish.h" />
     <ClInclude Include="organism.h" />
+    <ClInclude Include="parametres.h" />
     <ClInclude Include="plankton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
