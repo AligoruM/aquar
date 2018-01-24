@@ -37,7 +37,6 @@ std::shared_ptr<Organism> Plankton::breeding()
 	std::shared_ptr<Organism> obj(new Plankton(x, y - 1, aquarPtr));
 	aquarPtr->addOrganism(obj);
 	return obj;
-
 }
 
 void Plankton::move()
@@ -85,7 +84,7 @@ void Plankton::move()
 void Plankton::live()
 {
 	if (calories >= caloriesForBreeding)
-		breeding();
+		std::shared_ptr<Organism> trash = breeding();//пока так, может пригодиться
 	else
 	{
 		eat;
