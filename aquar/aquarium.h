@@ -11,7 +11,7 @@ public:
 	void tick();
 
 	std::pair<int, int> getSize();
-
+	void addOrganism(std::shared_ptr<Organism> org);
 protected:
 	std::vector<std::shared_ptr<Organism>> vect;
 	int heigh;

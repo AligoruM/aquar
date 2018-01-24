@@ -22,3 +22,8 @@ std::pair<int, int> Aquarium::getSize()
 {
 	return std::pair<int, int>(width, heigh);
 }
+
+void Aquarium::addOrganism(std::shared_ptr<Organism> org)
+{
+	vect.push_back(org);
+}

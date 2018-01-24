@@ -21,6 +21,7 @@ protected:
 	int lifetime;
 	int calories;
 	int caloriesForBreeding;
+	int cooldownBreeding;
 	double visionRad = 0;
 	int x;
 	int y;
