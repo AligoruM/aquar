@@ -18,11 +18,27 @@ void Aquarium::tick()
 	while (1)
 	{
 		std::cout << vect.size() << std::endl;
-		for (int i = 0; i < vect.size(); i++)
+		for (auto elem=vect.begin(); elem!=vect.end();)
 		{
-		
-			vect[i]->live();
+			if ((*elem)->getLifetime() > para->plankLifetime) 
+			{
+				std::cout << "dead";
+				elem = vect.erase(elem);
+				std::cout << vect.size() << std::endl;
+			}
+			else
+				//(*elem)->live();
+				elem++;
 		}
+		//try {
+		//vect.erase(std::remove_if(vect.begin(), vect.end(), [](std::shared_ptr<Organism> vect) { return  vect->getLifetime() >= 200; }));
+		//}
+		//catch (std::exception exc)
+		//{
+		//	std::cout << exc.what() << std::endl;
+		//}
+		for (int i = 0; i < vect.size(); i++)
+				vect[i]->live();
 	}
 }
 

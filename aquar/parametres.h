@@ -3,10 +3,11 @@ struct Parametres
 {
 public:
 	//plankton
-	int plankLifetime = 100;
-	int calForBreeding = 200;
+	int plankLifetime = 50;
+	int calForBreeding = 40;
 	int plankViewDist = 0;
 	int plankBreedingCD = 20;
+	int plankCal = 1;
 	//fish
 
 	//aquarium

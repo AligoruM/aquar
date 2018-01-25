@@ -4,6 +4,8 @@
 #include <memory>
 #include "plankton.h"
 #include <iostream>
+#include <algorithm>
+#include <exception>
 class Organism;
 
 

@@ -13,7 +13,7 @@ public:
 	virtual void eat();
 	virtual std::shared_ptr<Organism> breeding();
 	virtual void move();
-
+	virtual int getLifetime();
 	virtual void live();
 protected:
 	std::shared_ptr<Aquarium> aquarPtr;

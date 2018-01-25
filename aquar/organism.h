@@ -13,5 +13,6 @@ public:
 	virtual std::shared_ptr<Organism> breeding() = 0;
 	virtual void eat() = 0;
 	virtual void live() = 0;
+	virtual int getLifetime() = 0;
 };
 

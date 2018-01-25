@@ -12,6 +12,7 @@
 
 Plankton::Plankton(std::shared_ptr<Aquarium> pointer)
 {
+	//std::cout << "constr pointer" << std::endl;
 	aquarPtr = pointer;
 	para = pointer->getPara();
 	x = std::rand() % para->sizeX;
@@ -21,6 +22,7 @@ Plankton::Plankton(std::shared_ptr<Aquarium> pointer)
 
 Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
 {
+	//std::cout << "constr pointer and cords" << std::endl;
 	aquarPtr = pointer;
 	para = pointer->getPara();
 	x = x_;
@@ -31,18 +33,18 @@ Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
 
 Plankton::~Plankton()
 {
-
+	
 }
 
 void Plankton::eat()
 {
-	std::cout << "eat" << std::endl;
-	calories += 10;
+	//std::cout << "eat" << std::endl;
+	calories += para->plankCal;
 }
 
 std::shared_ptr<Organism> Plankton::breeding()
 {
-	std::cout << "breed" << std::endl;
+	//std::cout << "breed" << std::endl;
 
 	calories = 20;
 	std::shared_ptr<Organism> obj(new Plankton(x, y - 1, aquarPtr));
@@ -52,7 +54,7 @@ std::shared_ptr<Organism> Plankton::breeding()
 
 void Plankton::move()
 {
-	std::cout << "move" << std::endl;
+	//std::cout << "move" << std::endl;
 	if (rand() % 2 == 1)//движение по горизонтали
 	{
 		if (rand() % 2 == 1)
@@ -93,9 +95,15 @@ void Plankton::move()
 	}
 }
 
+int Plankton::getLifetime()
+{
+	return lifetime;
+}
+
 void Plankton::live()
 {
-	if (calories >= para->calForBreeding)
+	lifetime++;
+	if (calories >= (para->calForBreeding + (rand()%25)))
 	{
 		std::shared_ptr<Organism> trash = breeding();//пока так, может пригодиться
 	}
