@@ -15,13 +15,14 @@ public:
 	virtual void move();
 	virtual int getLifetime();
 	virtual void live();
+	virtual void draw(sf::RenderWindow* window);
 protected:
 	std::shared_ptr<Aquarium> aquarPtr;
 	int lifetime;
 	int calories;
 	int x;
 	int y;
-
+	sf::Sprite sprite;
 	Parametres* para;
 };
 

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "SFML/Graphics.hpp"
 #include <memory>
 #include <random>
 #include "parametres.h"
@@ -14,5 +14,6 @@ public:
 	virtual void eat() = 0;
 	virtual void live() = 0;
 	virtual int getLifetime() = 0;
+	virtual void draw(sf::RenderWindow* window) = 0;
 };
 

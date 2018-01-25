@@ -18,6 +18,8 @@ Plankton::Plankton(std::shared_ptr<Aquarium> pointer)
 	x = std::rand() % para->sizeX;
 	y = std::rand() % para->sizeY;
 	calories = 10;
+	sprite.setTexture(para->plankTexture);
+	sprite.setPosition(x, y);
 }
 
 Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
@@ -28,6 +30,8 @@ Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
 	x = x_;
 	y = y_;
 	calories = 10;
+	sprite.setTexture(para->plankTexture);
+	sprite.setPosition(x, y);
 }
 
 
@@ -59,38 +63,50 @@ void Plankton::move()
 	{
 		if (rand() % 2 == 1)
 			if (aquarPtr->getPara()->sizeX < x + 1)
+			{
+				sprite.setPosition(x+1, y);
 				x += 1;
+			}
 			else
 			{
+				sprite.setPosition(x-1, y);
 				x -= 1;
-				return;
 			}
 		else
 			if (x - 1 > 0)
+			{
+				sprite.setPosition(x-1, y);
 				x -= 1;
+			}
 			else
 			{
+				sprite.setPosition(x+1, y);
 				x += 1;
-				return;
 			}
 	}
 	if (rand() % 3 == 1)//движение по вертикали
 	{
 		if (rand() % 2 == 1)
 			if (aquarPtr->getPara()->sizeY < y + 1)
+			{
+				sprite.setPosition(x, y+1);
 				y += 1;
+			}
 			else
 			{
+				sprite.setPosition(x, y - 1);
 				y -= 1;
-				return;
 			}
 		else
 			if (y - 1 > 0)
+			{
+				sprite.setPosition(x, y-1);
 				y -= 1;
+			}
 			else
 			{
+				sprite.setPosition(x, y+1);
 				y += 1;
-				return;
 			}
 	}
 }
@@ -112,4 +128,9 @@ void Plankton::live()
 		this->eat();
 		this->move();
 	}
+}
+
+void Plankton::draw(sf::RenderWindow* window)
+{
+	window->draw(sprite);
 }

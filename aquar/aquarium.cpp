@@ -15,19 +15,19 @@ Aquarium::~Aquarium()
 
 void Aquarium::tick()
 {
-	while (1)
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(para->sizeX, para->sizeY), "Aquarium");
+
+	while (window->isOpen())
 	{
+		window->clear();
 		std::cout << vect.size() << std::endl;
 		for (auto elem=vect.begin(); elem!=vect.end();)
 		{
 			if ((*elem)->getLifetime() > para->plankLifetime) 
 			{
-				std::cout << "dead";
 				elem = vect.erase(elem);
-				std::cout << vect.size() << std::endl;
 			}
 			else
-				//(*elem)->live();
 				elem++;
 		}
 		//try {
@@ -37,8 +37,12 @@ void Aquarium::tick()
 		//{
 		//	std::cout << exc.what() << std::endl;
 		//}
-		for (int i = 0; i < vect.size(); i++)
-				vect[i]->live();
+		for (int i = 0; i < vect.size(); i++) 
+		{
+			vect[i]->live();
+			vect[i]->draw(window);
+		}
+		window->display();
 	}
 }
 

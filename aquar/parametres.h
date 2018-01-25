@@ -8,9 +8,10 @@ public:
 	int plankViewDist = 0;
 	int plankBreedingCD = 20;
 	int plankCal = 1;
+	sf::Texture plankTexture;
 	//fish
 
 	//aquarium
-	int sizeX = 200;
-	int sizeY = 100;
+	int sizeX = 800;
+	int sizeY = 600;
 };
