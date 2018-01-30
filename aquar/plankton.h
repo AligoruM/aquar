@@ -1,28 +1,21 @@
 #pragma once
 #include "organism.h"
-#include "aquarium.h"
 
 class Plankton: public Organism
 {
 public:
 	Plankton() = delete;
-	Plankton(std::shared_ptr<Aquarium> pointer);
-	Plankton(int x, int y, std::shared_ptr<Aquarium> pointer);
+	Plankton(std::vector<std::shared_ptr<Organism>>* organisms_, Parametres* parametres);
+	Plankton(int x, int y, std::vector<std::shared_ptr<Organism>>* organisms_, Parametres* parametres);
 	~Plankton();
 
 	virtual void eat();
-	virtual std::shared_ptr<Organism> breeding();
+	virtual void breeding();
 	virtual void move();
 	virtual int getLifetime();
 	virtual void live();
 	virtual void draw(sf::RenderWindow* window);
 protected:
-	std::shared_ptr<Aquarium> aquarPtr;
-	int lifetime;
-	int calories;
-	int x;
-	int y;
-	sf::Sprite sprite;
-	Parametres* para;
+
 };
 

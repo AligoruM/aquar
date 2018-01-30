@@ -10,28 +10,24 @@
 	calories = 10;
 }*/
 
-Plankton::Plankton(std::shared_ptr<Aquarium> pointer)
+Plankton::Plankton(std::vector<std::shared_ptr<Organism>>* organisms_, Parametres* parametres) : Organism(organisms_, parametres)
 {
 	//std::cout << "constr pointer" << std::endl;
-	aquarPtr = pointer;
-	para = pointer->getPara();
-	x = std::rand() % para->sizeX;
-	y = std::rand() % para->sizeY;
+	pos.x = std::rand() % para->sizeX;
+	pos.y = std::rand() % para->sizeY;
 	calories = 10;
 	sprite.setTexture(para->plankTexture);
-	sprite.setPosition(x, y);
+	sprite.setPosition(pos.x, pos.y);
 }
 
-Plankton::Plankton(int x_, int y_, std::shared_ptr<Aquarium> pointer)
+Plankton::Plankton(int x_, int y_, std::vector<std::shared_ptr<Organism>>* organisms_, Parametres* parametres) : Organism(organisms_, parametres)
 {
 	//std::cout << "constr pointer and cords" << std::endl;
-	aquarPtr = pointer;
-	para = pointer->getPara();
-	x = x_;
-	y = y_;
+	pos.x = x_;
+	pos.y = y_;
 	calories = 10;
 	sprite.setTexture(para->plankTexture);
-	sprite.setPosition(x, y);
+	sprite.setPosition(pos.x, pos.y);
 }
 
 
@@ -46,14 +42,13 @@ void Plankton::eat()
 	calories += para->plankCal;
 }
 
-std::shared_ptr<Organism> Plankton::breeding()
+void Plankton::breeding()
 {
 	//std::cout << "breed" << std::endl;
 
 	calories = 20;
-	std::shared_ptr<Organism> obj(new Plankton(x, y - 1, aquarPtr));
-	aquarPtr->addOrganism(obj);
-	return obj;
+	std::shared_ptr<Organism> obj(new Plankton(pos.x, pos.y - 1, organisms, para));
+	organisms->push_back(obj);
 }
 
 void Plankton::move()
@@ -62,51 +57,51 @@ void Plankton::move()
 	if (rand() % 2 == 1)//движение по горизонтали
 	{
 		if (rand() % 2 == 1)
-			if (aquarPtr->getPara()->sizeX < x + 1)
+			if (para->sizeX < pos.x + 1)
 			{
-				sprite.setPosition(x+1, y);
-				x += 1;
+				sprite.setPosition(pos.x + 1, pos.y);
+				pos.x += 1;
 			}
 			else
 			{
-				sprite.setPosition(x-1, y);
-				x -= 1;
+				sprite.setPosition(pos.x - 1, pos.y);
+				pos.x -= 1;
 			}
 		else
-			if (x - 1 > 0)
+			if (pos.x - 1 > 0)
 			{
-				sprite.setPosition(x-1, y);
-				x -= 1;
+				sprite.setPosition(pos.x - 1, pos.y);
+				pos.x -= 1;
 			}
 			else
 			{
-				sprite.setPosition(x+1, y);
-				x += 1;
+				sprite.setPosition(pos.x + 1, pos.y);
+				pos.x += 1;
 			}
 	}
 	if (rand() % 3 == 1)//движение по вертикали
 	{
 		if (rand() % 2 == 1)
-			if (aquarPtr->getPara()->sizeY < y + 1)
+			if (para->sizeY < pos.y + 1)
 			{
-				sprite.setPosition(x, y+1);
-				y += 1;
+				sprite.setPosition(pos.x, pos.y +1);
+				pos.y += 1;
 			}
 			else
 			{
-				sprite.setPosition(x, y - 1);
-				y -= 1;
+				sprite.setPosition(pos.x, pos.y - 1);
+				pos.y -= 1;
 			}
 		else
-			if (y - 1 > 0)
+			if (pos.y - 1 > 0)
 			{
-				sprite.setPosition(x, y-1);
-				y -= 1;
+				sprite.setPosition(pos.x, pos.y-1);
+				pos.y -= 1;
 			}
 			else
 			{
-				sprite.setPosition(x, y+1);
-				y += 1;
+				sprite.setPosition(pos.x, pos.y+1);
+				pos.y += 1;
 			}
 	}
 }
@@ -121,7 +116,7 @@ void Plankton::live()
 	lifetime++;
 	if (calories >= (para->calForBreeding + (rand()%25)))
 	{
-		std::shared_ptr<Organism> trash = breeding();//пока так, может пригодиться
+		breeding();//пока так, может пригодиться
 	}
 	else
 	{
