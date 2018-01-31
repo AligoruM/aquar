@@ -1,10 +1,5 @@
 #pragma once
-#include <windows.h>
-#include <vector>
-#include <memory>
-#include <iostream>
-#include <algorithm>
-#include <exception>
+
 #include "plankton.h"
 class Organism;
 
@@ -12,7 +7,7 @@ class Organism;
 class Aquarium
 {
 public:
-	Aquarium(int plankCount_, Parametres* para_);
+	Aquarium(Parametres* para_);
 	~Aquarium();
 	
 	void tick();
@@ -22,6 +17,7 @@ public:
 protected:
 	std::vector<std::shared_ptr<Organism>> vect;
 	Parametres* para;
+
 	int startPlankCount;
 };
 

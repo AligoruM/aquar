@@ -2,10 +2,9 @@
 
 
 
-Aquarium::Aquarium(int plankCount_, Parametres* para_)
+Aquarium::Aquarium(Parametres* para_)
 {
 	para = para_;
-	startPlankCount = plankCount_;
 }
 
 
@@ -21,6 +20,7 @@ void Aquarium::tick()
 	{
 		window->clear();
 		std::cout << vect.size() << std::endl;
+		std::srand(time(NULL));
 		for (auto elem=vect.begin(); elem!=vect.end();)
 		{
 			if ((*elem)->getLifetime() > para->plankLifetime) 
@@ -58,3 +58,4 @@ std::vector<std::shared_ptr<Organism>>* Aquarium::getOrganism()
 {
 	return &vect;
 }
+

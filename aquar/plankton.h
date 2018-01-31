@@ -16,6 +16,5 @@ public:
 	virtual void live();
 	virtual void draw(sf::RenderWindow* window);
 protected:
-
 };
 

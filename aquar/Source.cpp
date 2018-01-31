@@ -3,9 +3,11 @@
 
 void main()
 {
+	std::srand(time(NULL));
+
 	Parametres* para = new Parametres;
 	para->plankTexture.loadFromFile("C:/Users/Admin/Documents/GitHub/aquar/aquar/res/Plankton.png");
-	Aquarium aqua = Aquarium(10,para);
+	Aquarium aqua = Aquarium(para);
 	
 
 
