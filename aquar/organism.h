@@ -14,6 +14,7 @@ class Organism
 {
 protected:
 	Organism(std::vector<std::shared_ptr<Organism>>* organisms_, Parametres* parametres);
+	virtual ~Organism();
 	std::vector<std::shared_ptr<Organism>>* organisms;
 	int lifetime;
 	int calories;
@@ -22,14 +23,12 @@ protected:
 	sf::Vector2f direction;
 	sf::Sprite sprite;
 	Parametres* para;
-
-
-
+	
 	void setPosition(sf::Vector2f pos_);
 	sf::Vector2f getPosition();
 
-
-public:	
+public:
+	virtual void death() = 0;
 	virtual void move() = 0;
 	virtual void breeding() = 0;
 	virtual void eat() = 0;

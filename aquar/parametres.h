@@ -16,4 +16,5 @@ public:
 	//aquarium
 	int sizeX = 800;
 	int sizeY = 600;
+	int maxPlankCount = 50;
 };

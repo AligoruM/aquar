@@ -6,6 +6,11 @@ Organism::Organism(std::vector<std::shared_ptr<Organism>>* organisms_, Parametre
 	para = parametres;
 }
 
+Organism::~Organism()
+{
+	
+}
+
 void Organism::setPosition(sf::Vector2f pos_)
 {
 	pos = pos_;

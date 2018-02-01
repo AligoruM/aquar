@@ -40,6 +40,11 @@ Plankton::~Plankton()
 	
 }
 
+void Plankton::death()
+{
+	delete this;
+}
+
 void Plankton::eat()
 {
 	//std::cout << "eat" << std::endl;
@@ -58,15 +63,12 @@ void Plankton::breeding()
 void Plankton::move()
 {
 	//std::cout << "move" << std::endl;
-	
+	//srand(time(NULL));
 
 	direction.x = 1 * cos(moveAngle * PI / 180);
 	direction.y = 1 * sin(moveAngle * PI / 180);
 
-
 	pos += sf::Vector2f(direction.x * para->plankSpeed, direction.y * para->plankSpeed);
-
-
 
 	sprite.setPosition(pos);
 
@@ -130,7 +132,7 @@ int Plankton::getLifetime()
 void Plankton::live()
 {
 	lifetime++;
-	if (calories >= (para->calForBreeding + (rand()%25)))
+	if ((calories >= (para->calForBreeding + (rand()%25)))&&(organisms->size()<para->maxPlankCount))
 	{
 		breeding();//пока так, может пригодиться
 	}
@@ -138,11 +140,13 @@ void Plankton::live()
 	{
 		this->eat();
 		this->move();
+		/*if (lifetime >= para->plankLifetime)
+			death();*/
 	}
 }
 
 void Plankton::draw(sf::RenderWindow* window)
 {
-	std::cout << moveAngle << std::endl;
+	//std::cout << moveAngle << std::endl;
 	window->draw(sprite);
 }

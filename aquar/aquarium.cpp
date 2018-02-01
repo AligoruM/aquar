@@ -4,17 +4,18 @@
 
 Aquarium::Aquarium(Parametres* para_)
 {
+	window = new sf::RenderWindow(sf::VideoMode(para_->sizeX, para_->sizeY), "Aquarium");
 	para = para_;
 }
 
 
 Aquarium::~Aquarium()
 {
+
 }
 
 void Aquarium::tick()
 {
-	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(para->sizeX, para->sizeY), "Aquarium");
 
 	while (window->isOpen())
 	{
@@ -25,6 +26,7 @@ void Aquarium::tick()
 		{
 			if ((*elem)->getLifetime() > para->plankLifetime) 
 			{
+				elem->reset();
 				elem = vect.erase(elem);
 			}
 			else
@@ -36,7 +38,7 @@ void Aquarium::tick()
 			vect[i]->draw(window);
 		}
 		window->display();
-		Sleep(5);
+		Sleep(20);
 	}
 }
 
@@ -57,5 +59,11 @@ Parametres* Aquarium::getPara()
 std::vector<std::shared_ptr<Organism>>* Aquarium::getOrganism()
 {
 	return &vect;
+}
+
+void Aquarium::drawAquar()
+{
+	for (int i = 0; i < vect.size(); i++)
+		vect[i]->draw(window);
 }
 
