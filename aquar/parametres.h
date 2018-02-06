@@ -3,8 +3,8 @@ struct Parametres
 {
 public:
 	//plankton
-	int plankLifetime = 50;
-	int calForBreeding = 35;
+	int plankLifetime = 60;
+	int calForBreeding = 30;
 	int plankViewDist = 0;
 	int plankBreedingCD = 20;
 	int plankCal = 1;
@@ -16,5 +16,5 @@ public:
 	//aquarium
 	int sizeX = 800;
 	int sizeY = 600;
-	int maxPlankCount = 50;
+	int maxPlankCount = 100;
 };

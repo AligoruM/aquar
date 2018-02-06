@@ -19,6 +19,16 @@ void Aquarium::tick()
 
 	while (window->isOpen())
 	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window->close();
+				return;
+			}
+		}
+
 		window->clear();
 		std::cout << vect.size() << std::endl;
 		std::srand(time(NULL));
@@ -32,11 +42,11 @@ void Aquarium::tick()
 			else
 				elem++;
 		}
+
 		for (int i = 0; i < vect.size(); i++) 
-		{
 			vect[i]->live();
-			vect[i]->draw(window);
-		}
+
+		drawAquar();
 		window->display();
 		Sleep(20);
 	}
